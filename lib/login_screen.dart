@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tugasbank_isyana/data/nasabah_data.dart';
+import 'package:flutter_utspemob_ameng/data/nasabah_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'home_screen.dart';
+import 'pages/register_mbanking_page.dart';
+import 'pages/forgot_password_page.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -18,8 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
     final username = _usernameController.text.trim();
     final password = _passwordController.text.trim();
 
-    const validUsername = "isyana";
-    const validPassword = "2315091061";
+    const validUsername = "Ameng";
+    const validPassword = "221204";
 
     setState(() {
       usernameError = '';
@@ -46,18 +49,18 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // @override
-  // void dispose() {
-  //   _usernameController.dispose();
-  //   _passwordController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
             color: Colors.blue[900],
@@ -84,10 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     labelText: "Username",
                     border: OutlineInputBorder(),
-                    errorText:
-                        usernameError.isEmpty
-                            ? null
-                            : usernameError, // Menampilkan error jika ada
+                    errorText: usernameError.isEmpty ? null : usernameError,
                   ),
                 ),
                 SizedBox(height: 10),
@@ -96,10 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   decoration: InputDecoration(
                     labelText: "Password",
                     border: OutlineInputBorder(),
-                    errorText:
-                        passwordError.isEmpty
-                            ? null
-                            : passwordError, // Menampilkan error jika ada
+                    errorText: passwordError.isEmpty ? null : passwordError,
                   ),
                   obscureText: true,
                 ),
@@ -118,10 +115,27 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RegisterMbankingPage(),
+                          ),
+                        );
+                      },
                       child: Text("Daftar Mbanking"),
                     ),
-                    TextButton(onPressed: () {}, child: Text("Lupa password?")),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                           builder: (context) => ResetPasswordPage(),
+                          ),
+                        );
+                      },
+                      child: Text("Lupa password?"),
+                    ),
                   ],
                 ),
               ],
@@ -131,7 +145,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             padding: EdgeInsets.all(10),
             color: Colors.grey[300],
-            child: Text("copyright @2025 by iisyanaa"),
+            child: Text("Created by amelia"),
           ),
         ],
       ),

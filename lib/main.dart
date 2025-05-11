@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tugasbank_isyana/login_screen.dart';
-import 'package:flutter_tugasbank_isyana/pages/theme_provider.dart';
-import 'package:flutter_tugasbank_isyana/pages/setting_page.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_utspemob_ameng/login_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
-      child: const MyApp(),
-    ),
-  );
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Penting untuk operasi async
+  await initializeDateFormatting(
+    'id',
+    null,
+  ); // Inisialisasi lokal 'id' (Indonesia)
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,14 +17,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Koperasi Undiksha",
-      themeMode: themeProvider.currentTheme,
-      theme: ThemeData.light(),
-      darkTheme: ThemeData.dark(),
-      home: LoginScreen(), // Ganti ke SettingPage() untuk preview
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        fontFamily: 'Roboto',
+      ),
+      home: LoginScreen(), // Bisa diganti dengan SettingPage() untuk preview
     );
   }
 }
